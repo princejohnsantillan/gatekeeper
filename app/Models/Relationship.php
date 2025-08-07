@@ -2,11 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class Relationship extends Pivot
 {
+    /** @use HasFactory<\Database\Factories\RelationshipFactory> */
+    use HasFactory;
+
+    protected $table = 'relationships';
+
     protected function casts()
     {
         return [
