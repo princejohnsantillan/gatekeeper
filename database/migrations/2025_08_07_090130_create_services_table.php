@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('location');
             $table->timestamp('starts_at');
             $table->timestamp('ends_at');
+            $table->text('encryption_key');
             $table->timestamps();
         });
     }

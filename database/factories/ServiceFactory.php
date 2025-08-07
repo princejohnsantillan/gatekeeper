@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Service>
@@ -22,6 +23,7 @@ class ServiceFactory extends Factory
             'location' => $this->faker->address(),
             'starts_at' => $this->faker->date(),
             'ends_at' => $this->faker->date(),
+            'encryption_key' => Str::random(10),
         ];
     }
 }
