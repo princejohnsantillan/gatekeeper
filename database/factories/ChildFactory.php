@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Guardian;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,6 +22,7 @@ class ChildFactory extends Factory
             'last_name' => $this->faker->lastName(),
             'birth_date' => $this->faker->date(),
             'gender' => $this->faker->boolean(),
+            'primary_guardian_id' => Guardian::factory(),
         ];
     }
 }

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('last_name')->index();
             $table->date('birth_date');
             $table->string('gender');
+            $table->string('email');
             $table->string('phone')->nullable();
-            $table->string('email')->nullable();
             $table->timestamps();
         });
     }

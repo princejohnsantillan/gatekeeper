@@ -19,7 +19,10 @@ return new class extends Migration
             $table->date('birth_date')->index();
             $table->boolean('gender')->index();
             $table->text('notes')->nullable();
+            $table->unsignedBigInteger('primary_guardian_id');
             $table->timestamps();
+
+            $table->foreign('primary_guardian_id')->references('id')->on('guardians')->cascadeOnDelete();
         });
     }
 

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -21,9 +22,10 @@ class ServiceFactory extends Factory
             'title' => $this->faker->sentence(),
             'description' => $this->faker->paragraph(),
             'location' => $this->faker->address(),
-            'starts_at' => $this->faker->date(),
-            'ends_at' => $this->faker->date(),
-            'encryption_key' => Str::random(10),
+            'starts_at' => now(),
+            'ends_at' => now()->addHours(2),
+            'encryption_key' => Str::random(),
+            'created_by' => User::factory()->admin(),
         ];
     }
 }

@@ -19,10 +19,14 @@ return new class extends Migration
             $table->timestamp('checked_in_at');
             $table->unsignedBigInteger('checked_out_by')->nullable();
             $table->timestamp('checked_out_at')->nullable();
+            $table->unsignedBigInteger('entered_by'); // Staff or admin user
+            $table->unsignedBigInteger('exited_by')->nullable(); // Staff or admin user
+            $table->timestamps();
 
             $table->foreign('checked_in_by')->references('id')->on('guardians')->cascadeOnDelete();
             $table->foreign('checked_out_by')->references('id')->on('guardians')->cascadeOnDelete();
-            $table->timestamps();
+            $table->foreign('entered_by')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('exited_by')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 
