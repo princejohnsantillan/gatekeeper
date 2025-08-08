@@ -11,13 +11,19 @@ class Child extends Model
     /** @use HasFactory<\Database\Factories\ChildFactory> */
     use HasFactory;
 
-    public function guardians(): BelongsToMany
+    public function guardians(?bool $authorized = null): BelongsToMany
     {
-        return $this->belongsToMany(Guardian::class, Relationship::class);
+        $guardians = $this->belongsToMany(Guardian::class, Relationship::class);
+
+        if ($authorized !== null) {
+            return $guardians->wherePivot('is_authorized_guardian', $authorized);
+        }
+
+        return $guardians;
     }
 
     public function servicesAttended(): BelongsToMany
     {
-        return $this->belongsToMany(Service::class, Attendee::class);
+        return $this->belongsToMany(Service::class, Attendance::class);
     }
 }

@@ -11,8 +11,14 @@ class Service extends Model
     /** @use HasFactory<\Database\Factories\ServiceFactory> */
     use HasFactory;
 
-    public function attendees(): BelongsToMany
+    public function children(): BelongsToMany
     {
-        return $this->belongsToMany(Child::class, Attendee::class);
+        return $this->belongsToMany(Child::class, Attendance::class);
+    }
+
+    public function notCheckedOutChildren(): BelongsToMany
+    {
+        return $this->belongsToMany(Child::class, Attendance::class)
+            ->wherePivotNull('checked_out_at');
     }
 }

@@ -8,9 +8,9 @@ use App\Models\Service;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Attendee>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Attendance>
  */
-class AttendeeFactory extends Factory
+class AttendanceFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -27,5 +27,13 @@ class AttendeeFactory extends Factory
             'checked_out_by' => Guardian::factory(),
             'checked_out_at' => $this->faker->date(),
         ];
+    }
+
+    public function notCheckedOut()
+    {
+        return $this->state(fn (array $attributes) => [
+            'checked_out_by' => null,
+            'checked_out_at' => null,
+        ]);
     }
 }

@@ -6,21 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class Attendee extends Pivot
+class Attendance extends Pivot
 {
-    /** @use HasFactory<\Database\Factories\AttendeeFactory> */
+    /** @use HasFactory<\Database\Factories\AttendanceFactory> */
     use HasFactory;
-
-    protected $table = 'attendees';
-
-    public function child(): BelongsTo
-    {
-        return $this->belongsTo(Child::class);
-    }
 
     public function service(): BelongsTo
     {
         return $this->belongsTo(Service::class);
+    }
+
+    public function child(): BelongsTo
+    {
+        return $this->belongsTo(Child::class);
     }
 
     public function checkedInBy(): BelongsTo
