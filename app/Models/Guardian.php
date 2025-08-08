@@ -11,6 +11,7 @@ class Guardian extends Model
     /** @use HasFactory<\Database\Factories\GuardianFactory> */
     use HasFactory;
 
+    /** @return BelongsToMany<Child, $this> */
     public function children(): BelongsToMany
     {
         return $this->belongsToMany(Child::class, Relationship::class);

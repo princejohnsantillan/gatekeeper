@@ -21,11 +21,13 @@ class Relationship extends Pivot
         ];
     }
 
+    /** @return BelongsTo<Guardian, $this> */
     public function guardian(): BelongsTo
     {
         return $this->belongsTo(Guardian::class);
     }
 
+    /** @return BelongsTo<Child, $this> */
     public function child(): BelongsTo
     {
         return $this->belongsTo(Child::class);
