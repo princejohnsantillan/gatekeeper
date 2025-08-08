@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
+/**
+ * @mixin IdeHelperRelationship
+ */
 class Relationship extends Pivot
 {
     /** @use HasFactory<\Database\Factories\RelationshipFactory> */
