@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Guardian;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,20 +15,18 @@ return new class extends Migration
     {
         Schema::create('attendance', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('child_id')->constrained()->cascadeOnDelete();
             $table->foreignId('service_id')->constrained()->cascadeOnDelete();
-            $table->unsignedBigInteger('checked_in_by');
-            $table->timestamp('checked_in_at');
-            $table->unsignedBigInteger('checked_out_by')->nullable();
-            $table->timestamp('checked_out_at')->nullable();
-            $table->unsignedBigInteger('entered_by'); // Staff or admin user
-            $table->unsignedBigInteger('exited_by')->nullable(); // Staff or admin user
-            $table->timestamps();
+            $table->foreignId('child_id')->constrained()->cascadeOnDelete();
 
-            $table->foreign('checked_in_by')->references('id')->on('guardians')->cascadeOnDelete();
-            $table->foreign('checked_out_by')->references('id')->on('guardians')->cascadeOnDelete();
-            $table->foreign('entered_by')->references('id')->on('users')->cascadeOnDelete();
-            $table->foreign('exited_by')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreignIdFor(User::class, 'checkin_processed_by')->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Guardian::class, 'checked_in_by')->constrained()->cascadeOnDelete();
+            $table->timestamp('checked_in_at');
+
+            $table->foreignIdFor(User::class, 'checkout_processed_by')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Guardian::class, 'checked_out_by')->nullable()->constrained()->cascadeOnDelete();
+            $table->timestamp('checked_out_at')->nullable();
+
+            $table->timestamps();
         });
     }
 

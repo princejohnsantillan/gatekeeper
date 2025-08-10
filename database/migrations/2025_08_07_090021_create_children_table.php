@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Guardian;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,10 +21,8 @@ return new class extends Migration
             $table->date('birth_date')->index();
             $table->boolean('gender')->index();
             $table->text('notes')->nullable();
-            $table->unsignedBigInteger('primary_guardian_id');
+            $table->foreignIdFor(Guardian::class, 'primary_guardian_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
-
-            $table->foreign('primary_guardian_id')->references('id')->on('guardians')->cascadeOnDelete();
         });
     }
 

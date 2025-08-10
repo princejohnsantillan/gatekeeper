@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -25,6 +26,7 @@ class ServiceFactory extends Factory
             'starts_at' => now(),
             'ends_at' => now()->addHours(2),
             'encryption_key' => Str::random(),
+            'organization_id' => Organization::factory(),
             'created_by' => User::factory()->admin(),
         ];
     }

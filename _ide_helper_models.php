@@ -14,14 +14,14 @@
 namespace App\Models{
 /**
  * @property int $id
- * @property int $child_id
  * @property int $service_id
+ * @property int $child_id
+ * @property int $checkin_processed_by
  * @property int $checked_in_by
  * @property string $checked_in_at
+ * @property int|null $checkout_processed_by
  * @property int|null $checked_out_by
  * @property string|null $checked_out_at
- * @property int $entered_by
- * @property int|null $exited_by
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Guardian $checkedInBy
@@ -36,10 +36,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Attendance whereCheckedInBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Attendance whereCheckedOutAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Attendance whereCheckedOutBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Attendance whereCheckinProcessedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Attendance whereCheckoutProcessedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Attendance whereChildId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Attendance whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Attendance whereEnteredBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Attendance whereExitedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Attendance whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Attendance whereServiceId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Attendance whereUpdatedAt($value)
@@ -124,6 +124,33 @@ namespace App\Models{
 namespace App\Models{
 /**
  * @property int $id
+ * @property string $name
+ * @property string|null $description
+ * @property int $owned_by
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User $owner
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Service> $services
+ * @property-read int|null $services_count
+ * @method static \Database\Factories\OrganizationFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereOwnedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	#[\AllowDynamicProperties]
+	class IdeHelperOrganization {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
  * @property int $guardian_id
  * @property int $child_id
  * @property \App\Enums\Relationship $relationship_type
@@ -158,6 +185,7 @@ namespace App\Models{
  * @property string $ends_at
  * @property string|null $notes
  * @property string $encryption_key
+ * @property int $organization_id
  * @property int $created_by
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -166,6 +194,7 @@ namespace App\Models{
  * @property-read int|null $children_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Child> $notCheckedOutChildren
  * @property-read int|null $not_checked_out_children_count
+ * @property-read \App\Models\Organization $organization
  * @method static \Database\Factories\ServiceFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Service newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Service newQuery()
@@ -177,6 +206,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Service whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Service whereLocation($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Service whereNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Service whereOrganizationId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Service whereStartsAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Service whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Service whereUpdatedAt($value)
@@ -201,6 +231,8 @@ namespace App\Models{
  * @property-read \App\Models\Guardian|null $guardian
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Organization> $organizations
+ * @property-read int|null $organizations_count
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newQuery()

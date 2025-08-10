@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Organization;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,10 +21,9 @@ return new class extends Migration
             $table->timestamp('ends_at');
             $table->text('notes')->nullable();
             $table->string('encryption_key');
-            $table->unsignedBigInteger('created_by');
+            $table->foreignIdFor(Organization::class, 'organization_id')->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(User::class, 'created_by')->constrained()->cascadeOnDelete();
             $table->timestamps();
-
-            $table->foreign('created_by')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 

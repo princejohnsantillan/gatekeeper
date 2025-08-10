@@ -7,6 +7,7 @@ use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -53,12 +54,6 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         ];
     }
 
-    /** @return BelongsTo<Guardian, $this> */
-    public function guardian(): BelongsTo
-    {
-        return $this->belongsTo(Guardian::class);
-    }
-
     public function canAccessPanel(Panel $panel): bool
     {
         return match ($panel->getId()) {
@@ -66,5 +61,17 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
             'guardian' => ! is_null($this->guardian_id),
             default => false,
         };
+    }
+
+    /** @return HasMany<Organization, $this> */
+    public function organizations(): HasMany
+    {
+        return $this->hasMany(Organization::class);
+    }
+
+    /** @return BelongsTo<Guardian, $this> */
+    public function guardian(): BelongsTo
+    {
+        return $this->belongsTo(Guardian::class);
     }
 }
