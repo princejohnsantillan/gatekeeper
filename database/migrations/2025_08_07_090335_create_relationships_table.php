@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('guardian_id')->constrained()->cascadeOnDelete();
             $table->foreignId('child_id')->constrained()->cascadeOnDelete();
-            $table->string('relationship_type');
-            $table->boolean('is_authorized_guardian')->default(false);
+            $table->string('relationship_type')->index();
+            $table->boolean('is_authorized_guardian')->default(false)->index();
             $table->timestamps();
         });
     }

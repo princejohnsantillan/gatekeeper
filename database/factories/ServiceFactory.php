@@ -27,7 +27,7 @@ class ServiceFactory extends Factory
             'ends_at' => now()->addHours(2),
             'encryption_key' => Str::random(),
             'organization_id' => Organization::factory(),
-            'created_by' => User::factory()->admin(),
+            'created_by' => User::factory(),
         ];
     }
 }

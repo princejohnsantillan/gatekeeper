@@ -27,8 +27,8 @@ class AttendanceFactory extends Factory
             'checked_in_at' => now(),
             'checked_out_by' => Guardian::factory(),
             'checked_out_at' => now()->addHours(2),
-            'entered_by' => User::factory()->admin(),
-            'exited_by' => User::factory()->admin(),
+            'entered_by' => User::factory(),
+            'exited_by' => User::factory(),
         ];
     }
 
