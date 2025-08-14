@@ -35,6 +35,15 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('attendance', function (Blueprint $table) {
+            $table->dropForeign('attendance_service_id_foreign');
+            $table->dropForeign('attendance_child_id_foreign');
+            $table->dropForeign('attendance_checkin_processed_by_foreign');
+            $table->dropForeign('attendance_checked_in_by_foreign');
+            $table->dropForeign('attendance_checkout_processed_by_foreign');
+            $table->dropForeign('attendance_checked_out_by_foreign');
+        });
+
         Schema::dropIfExists('attendee');
     }
 };
