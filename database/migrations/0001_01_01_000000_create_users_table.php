@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->foreignIdFor(Guardian::class, 'guardian_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(Guardian::class, 'guardian_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

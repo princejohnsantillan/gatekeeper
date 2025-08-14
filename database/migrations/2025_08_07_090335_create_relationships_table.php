@@ -26,6 +26,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('relationships', function (Blueprint $table) {
+            $table->dropForeign('relationships_guardian_id_foreign');
+            $table->dropForeign('relationships_child_id_foreign');
+        });
+
         Schema::dropIfExists('relationship');
     }
 };

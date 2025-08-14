@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('birth_date')->index();
             $table->boolean('gender')->index();
             $table->text('notes')->nullable();
-            $table->foreignIdFor(Guardian::class, 'primary_guardian_id')->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Guardian::class, 'primary_guardian_id');
             $table->timestamps();
         });
     }
